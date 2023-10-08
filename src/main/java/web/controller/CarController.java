@@ -8,21 +8,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
-import web.dao.CarDao;
-
-import web.model.Car;
-
-
-import java.util.List;
+import web.dao.CarDaoImpl;
+import web.service.CarService;
 
 
 @Controller
 public class CarController {
     @Autowired
-    private CarDao carDao;
+    private CarService carService;
     @GetMapping(value = "/cars")
     public String Cars(@RequestParam(defaultValue="5") int count, Model model){
-        model.addAttribute("cars",carDao.getCar(count));
+        model.addAttribute("cars",carService.getCars(count));
         return "cars";
 
     }
