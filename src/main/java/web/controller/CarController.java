@@ -14,15 +14,18 @@ import web.service.CarService;
 
 @Controller
 public class CarController {
-    @Autowired
-    private CarService carService;
+    private final CarService carService;
+
+    public CarController(CarService carService) {
+        this.carService = carService;
+    }
+
     @GetMapping(value = "/cars")
-    public String Cars(@RequestParam(defaultValue="5") int count, Model model){
-        model.addAttribute("cars",carService.getCars(count));
+    public String Cars(@RequestParam(defaultValue = "5") int count, Model model) {
+        model.addAttribute("cars", carService.getCars(count));
         return "cars";
 
     }
-
 
 
 }
